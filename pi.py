@@ -1,29 +1,31 @@
-from wordcloud import WordCloud, STOPWORDS 
+from os import path 
+
 from PIL import Image
 import numpy as np 
 import matplotlib.pyplot as plt
-
-with open ("Alice in Wonderland.txt") as f:
-    text = f.read()
-
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-
-with open ("Alice in Wonderland.txt") as f:
-    text = f.read()
-alice_mask = np.array(Image.open(path.join(d,'alice_mask.png')))
-WordCloud = WordCloud(with=1920, height==1200)
-
-wordcloud.generate(text)
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.show()
-
-    
-wordcloud = WordCloud(width=1920, height= 1200)
+import os
+from wordcloud import WordCloud, STOPWORDS
 STOPWORDS.add('said')
-STOPWORDS.add('illustration')
+
+d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
+
+text = open(path.join(d, 'alice in Wonderland.txt')).read()
+
+
+
+alice_mask = np.array(Image.open(path.join(d,'alice_mask.png')))
+
+STOPWORDS = set(STOPWORDS)
+STOPWORDS.add("said")
+
+wordcloud = WordCloud(background_color="white", max_words=200, mask=alice_mask, contour_width=3, contour_color='steelblue')
 wordcloud.generate(text)
+wordcloud.to_file(path.join("alice.png"))
+
 plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis('off')
+plt.axis("off")
+plt.axis("off")
 plt.show()
+
+
 
